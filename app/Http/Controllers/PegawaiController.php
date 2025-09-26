@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Carbon\Carbon; // Tambahkan ini untuk mempermudah perhitungan tanggal
 
 class PegawaiController extends Controller
 {
@@ -11,16 +10,21 @@ class PegawaiController extends Controller
 
     public function latihan()
     {
-        $tanggalLahir = Carbon::parse('2006-08-05');
-        $umur = $tanggalLahir->age; // Menghitung umur secara otomatis
+        // Data tanggal lahir dan tanggal masuk
+        $tanggalLahir = new \DateTime('2006-08-05');
+        $tanggalMasuk = new \DateTime('2022-01-10');
+        $hariIni = new \DateTime();
 
-        $tanggalMasuk = Carbon::parse('2022-01-10');
-        $sejakBerapaHari = $tanggalMasuk->diffInDays(Carbon::now()); // Menghitung selisih hari secara otomatis
+        // Menghitung umur secara manual
+        $umur = $hariIni->diff($tanggalLahir)->y;
+
+        // Menghitung selisih hari secara manual
+        $sejakBerapaHari = $hariIni->diff($tanggalMasuk)->days;
 
         // Data pegawai yang sudah diperbarui
         $data_pegawai = [
             'nama' => 'Vanesya Wilyan',
-            'tanggal_lahir' => $tanggalLahir->format('d F Y'), // Format tanggal lahir agar lebih rapi
+            'tanggal_lahir' => '05 Agustus 2006',
             'umur' => $umur,
             'hobi' => [
                 'Memasak',
@@ -29,7 +33,7 @@ class PegawaiController extends Controller
                 'Traveling',
                 'Menulis'
             ],
-            'tanggal_masuk' => $tanggalMasuk->format('d F Y'),
+            'tanggal_masuk' => '10 Januari 2022',
             'sejak_berapa_hari' => $sejakBerapaHari,
             'semester' => 3,
             'status' => 'Mahasiswa',
