@@ -1,25 +1,28 @@
+<!-- resources/views/latihan.blade.php -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tugas Pertemuan 3 - Latihan</title>
+    <title>Data Pegawai</title>
 </head>
 <body>
-    <h1>Data Pegawai</h1>
+    <h1>Profil Pegawai</h1>
+
+    <p><strong>Nama:</strong> {{ $pegawai['nama'] }}</p>
+    <p><strong>Tanggal Lahir:</strong> {{ $pegawai['tanggal_lahir'] }}</p>
+    <p><strong>Umur:</strong> {{ $pegawai['umur'] }} tahun</p>
+
+    <p><strong>Hobi:</strong></p>
     <ul>
-        <li><strong>Nama:</strong> {{ $pegawai['nama'] }}</li>
-        <li><strong>Tanggal Lahir:</strong> {{ $pegawai['tanggal_lahir'] }}</li>
-        <li><strong>Umur:</strong> {{ $pegawai['umur'] }} tahun</li>
-        <li><strong>Hobi:</strong></li>
-        <ul>
-            @foreach ($pegawai['hobi'] as $hobi)
-                <li>{{ $hobi }}</li>
-            @endforeach
-        </ul>
-        <li><strong>Tanggal Masuk:</strong> {{ $pegawai['tanggal_masuk'] }}</li>
-        <li><strong>Sudah Berapa Hari Bekerja:</strong> {{ $pegawai['sejak_berapa_hari'] }} hari</li>
-        <li><strong>Semester saat ini:</strong> {{ $pegawai['semester'] }}</li>
-        <li><strong>Status:</strong> {{ $pegawai['status'] }}</li>
+        @foreach ($pegawai['hobi'] as $hobi)
+            <li>{{ $hobi }}</li>
+        @endforeach
     </ul>
+
+    <p><strong>Tanggal Masuk:</strong> {{ $pegawai['tanggal_masuk'] }}</p>
+    <p><strong>Sejak Berapa Hari:</strong> {{ $pegawai['sejak_berapa_hari'] }} hari</p>
+    <p><strong>Semester:</strong> {{ $pegawai['semester'] }}</p>
+    <p><strong>Status:</strong> {{ $pegawai['status'] }}</p>
 </body>
 </html>
