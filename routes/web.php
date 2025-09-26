@@ -32,7 +32,7 @@ Route::get('/about', function () {
 Route::get('/home', [HomeController::class, 'index']);
 // ... route lainnya
 
-Route::get('/latihan-tugas', [PegawaiController::class, 'latihan']);
+Route::get('/latihan-tugas', [PegawaiController::class, 'latihan2']);
 
 
 
