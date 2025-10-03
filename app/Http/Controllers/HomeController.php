@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
 		/* Cara 1 */
     $data ['username']        = 'Heroku';
-    $data ['last_login']      = date('Y-m-d H:i:s');
+    $data ['login']      = date('Y-m-d H:i:s');
     $data ['pendidikan'] = ['SD','SMP','SMA','S1','S2','S3'];
     return view('home', $data );
 }
