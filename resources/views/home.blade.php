@@ -4,17 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Laravel App</title>
-    <!-- Bootstrap 5 CSS -->
+    <title>My Laravel App (Pink Theme)</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
+    <!-- Google Font Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="{{ asset('assets/css/custom-style.css') }}">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         .navbar-brand {
-            font-weight: bold;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            width: auto;
         }
 
         .navbar {
@@ -22,7 +31,7 @@
         }
 
         .hero-section {
-            background-color: #3187e9;
+            background-color: #ff69b4;
             color: white;
             padding: 50px 0;
             text-align: center;
@@ -30,6 +39,7 @@
 
         .hero-section h1 {
             font-size: 3rem;
+            font-weight: 700;
         }
 
         .card {
@@ -49,6 +59,46 @@
             font-size: 0.9rem;
             color: #6c757d;
         }
+
+        :root {
+            --bs-primary: #ff69b4;
+            --bs-primary-rgb: 255, 105, 180;
+        }
+
+        .btn-primary {
+            --bs-btn-bg: var(--bs-primary);
+            --bs-btn-border-color: var(--bs-primary);
+            --bs-btn-hover-bg: #ff8cba;
+            --bs-btn-hover-border-color: #ff8cba;
+            --bs-btn-active-bg: #e0669c;
+            --bs-btn-active-border-color: #e0669c;
+        }
+
+        .btn-outline-primary {
+            --bs-btn-color: var(--bs-primary);
+            --bs-btn-border-color: var(--bs-primary);
+            --bs-btn-hover-bg: var(--bs-primary);
+            --bs-btn-hover-border-color: var(--bs-primary);
+        }
+
+        .text-bg-primary {
+            background-color: var(--bs-primary) !important;
+        }
+
+        .alert-primary {
+            --bs-alert-color: #85375c;
+            --bs-alert-bg: #ffe4f0;
+            --bs-alert-border-color: #ffc4e0;
+        }
+
+        h5.card-title,
+        h3.h5 {
+            font-weight: 600;
+        }
+
+        label.form-label {
+            font-weight: 500;
+        }
     </style>
 </head>
 
@@ -56,24 +106,20 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">My Laravel App</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#">
+                <img src="{{ asset('assets/images/logo.png') }}" alt="Logo">
+                My Laravel App
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -82,29 +128,36 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container">
-            <h1 class="display-6 mb-2">{{$username}}</h1>
-            <p class="lead mb-0">{{$last_login}}</p>
+            <h1 class="display-6 mb-2 font-baru">{{ $username }}</h1>
+            <p class="lead mb-0">{{ $last_login }}</p>
         </div>
     </section>
 
-    <!-- Content Section -->
-    <section id="content" class="container ">
+    <!-- Konten -->
+    <section id="content" class="container">
         <div class="row">
             <div class="col-md-6">
-                {{-- About --}}
+                @if (session('info'))
+                    <div class="alert alert-info mt-3">
+                        {!! session('info') !!}
+                    </div>
+                @endif
+
                 <div class="card mb-4">
                     <div class="card-body">
                         <h5 class="card-title">About Our Application</h5>
-                        <p class="card-text">Our application provides a clean and intuitive interface, allowing users to navigate easily and perform tasks efficiently. Built with Laravel and Bootstrap, it offers flexibility and responsiveness.</p>
+                        <p class="card-text">Our application provides a clean and intuitive interface, allowing users to
+                            navigate easily and perform tasks efficiently. Built with Laravel and Bootstrap, it offers
+                            flexibility and responsiveness.</p>
                         <a href="#" class="btn btn-primary">Explore More</a>
                     </div>
                 </div>
 
-                <!-- Accordion -->
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne">
                                 About Us
                             </button>
                         </h2>
@@ -116,7 +169,8 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo">
                                 Our Services
                             </button>
                         </h2>
@@ -128,7 +182,6 @@
                     </div>
                 </div>
 
-                {{-- Badge, List & Card --}}
                 <div class="card">
                     <div class="card-body">
                         <h3 class="h5 mb-3">Badges, List, &amp; Card</h3>
@@ -139,10 +192,8 @@
                         </div>
                         <ul class="list-group mb-3">
                             @foreach ($list_pendidikan as $item)
-                            <li class="list-group-item">{{$item}}   </li>
+                                <li class="list-group-item">{{ $item }}</li>
                             @endforeach
-
-
                         </ul>
                         <div class="p-3 border rounded">
                             <strong>Div umum</strong> — ini hanya <em>container</em> untuk konten bebas.
@@ -154,9 +205,42 @@
                 </div>
             </div>
 
+            <!-- Kolom Kanan -->
             <div class="col-md-6">
-                {{-- Alerts --}}
-                <div class="card ">
+                <!-- Form Pertanyaan -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Form Pertanyaan</h5>
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </div>
+                        @endif
+
+                        <form action="{{ route('question.store') }}" method="POST">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="nama" class="form-label">Nama</label>
+                                <input type="text" class="form-control" name="nama" value="{{ old('nama') }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="text" class="form-control" name="email" value="{{ old('email') }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="pertanyaan" class="form-label">Pertanyaan</label>
+                                <textarea class="form-control" rows="4" name="pertanyaan">{{ old('pertanyaan') }}</textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Kirim Pertanyaan</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Alert dan Button -->
+                <div class="card">
                     <div class="card-body">
                         <h3 class="h5 mb-3">Alerts</h3>
                         <div class="alert alert-primary mb-2">Informational alert</div>
@@ -166,21 +250,20 @@
                     </div>
                 </div>
 
-                {{-- Buttons --}}
                 <div class="card">
                     <div class="card-body">
                         <h3 class="h5 mb-3">Buttons</h3>
                         <div class="d-flex flex-wrap gap-2">
-                            <button class="btn btn-primary">Primary</button>
+                            <button class="btn btn-primary">Primary (Pink)</button>
                             <button class="btn btn-secondary">Secondary</button>
-                            <button class="btn btn-outline-primary">Outline</button>
+                            <button class="btn btn-outline-primary">Outline (Pink)</button>
                             <button class="btn btn-success">Success</button>
                             <button class="btn btn-danger">Danger</button>
                         </div>
                     </div>
                 </div>
 
-                {{-- Table --}}
+                <!-- Tabel -->
                 <div class="card">
                     <div class="card-body">
                         <h3 class="h5 mb-3">Table</h3>
@@ -197,26 +280,28 @@
                                 <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>Ani</td>
+                                        <td>zienn</td>
                                         <td>Admin</td>
                                         <td><span class="badge text-bg-success">Active</span></td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
-                                        <td>Budi</td>
+                                        <td>zidane</td>
                                         <td>User</td>
                                         <td><span class="badge text-bg-secondary">Inactive</span></td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>Cici</td>
+                                        <td>deriel</td>
                                         <td>Editor</td>
                                         <td><span class="badge text-bg-warning">Pending</span></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <p class="text-muted small mb-0">Tambahkan <code>.table-striped</code> atau <code>.table-bordered</code> sesuai kebutuhan.</p>
+                        <p class="text-muted small mb-0">Tambahkan <code>.table-striped</code> atau
+                            <code>.table-bordered</code> sesuai kebutuhan.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -226,13 +311,11 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; {{date('Y')}} My Laravel App. All Rights Reserved.</p>
+            <p>&copy; {{ date('Y') }} My Laravel App. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
-
