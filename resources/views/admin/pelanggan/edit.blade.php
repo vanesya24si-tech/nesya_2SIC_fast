@@ -1,9 +1,13 @@
 <!--
 
 
+
+
 =========================================================
 * Volt Pro - Premium Bootstrap 5 Dashboard
 =========================================================
+
+
 
 
 * Product Page: https://themesberg.com/product/admin-dashboard/volt-bootstrap-5-dashboard
@@ -11,18 +15,28 @@
 * License (https://themesberg.com/licensing)
 
 
+
+
 * Designed and coded by https://themesberg.com
+
+
 
 
 =========================================================
 
 
+
+
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. Please contact us to request a removal.
+
+
 
 
 -->
 <!DOCTYPE html>
 <html lang="en">
+
+
 
 
 <head>
@@ -32,6 +46,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="title" content="Volt - Free Bootstrap 5 Dashboard">
     <meta name="author" content="Themesberg">
+
+
 
 
     <!-- Favicon -->
@@ -44,11 +60,17 @@
     <meta name="theme-color" content="#ffffff">
 
 
+
+
     <!-- Volt CSS -->
     <link type="text/css" href="{{asset('assets-admin/css/volt.css') }}" rel="stylesheet">
 
 
+
+
 </head>
+
+
 
 
 <body>
@@ -62,6 +84,8 @@
             </button>
         </div>
     </nav>
+
+
 
 
     <nav id="sidebarMenu" class="sidebar d-lg-block bg-gray-800 text-white collapse" data-simplebar>
@@ -112,7 +136,9 @@
                 </li>
 
 
-<li class="nav-item  active ">
+
+
+                <li class="nav-item  active ">
             <a href="" class="nav-link">
                 <span class="sidebar-icon">
                     <svg class="icon icon-xs me-2" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -122,6 +148,10 @@
                 <span class="sidebar-text">Pelanggan</span>
             </a>
         </li>
+
+
+
+
                 <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
                 <li class="nav-item">
                     <a href="https://themesberg.com/docs/volt-bootstrap-5-dashboard/getting-started/quick-start/" target="_blank" class="nav-link d-flex align-items-center">
@@ -148,7 +178,11 @@
     </nav>
 
 
+
+
     <main class="content">
+
+
 
 
         <nav class="navbar navbar-top navbar-expand navbar-dashboard navbar-dark ps-0 pe-2 pb-0">
@@ -283,6 +317,8 @@
         </nav>
 
 
+
+
         <div class="py-4">
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                 <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
@@ -294,78 +330,93 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item"><a href="#">Pelanggan</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Tambah Pelanggan</li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Pelanggan</li>
                 </ol>
             </nav>
             <div class="d-flex justify-content-between w-100 flex-wrap">
                 <div class="mb-3 mb-lg-0">
-                    <h1 class="h4">Tambah Pelanggan</h1>
-                    <p class="mb-0">Form untuk menambahkan data pelanggan baru.</p>
+                    <h1 class="h4">Edit Pelanggan</h1>
+                    <p class="mb-0">Form untuk mengedit data pelanggan.</p>
                 </div>
                 <div>
-                    <a href="" class="btn btn-primary"><i class="far fa-question-circle me-1"></i> Kembali</a>
+                    <a href="{{route('pelanggan.index')}}" class="btn btn-primary"><i class="far fa-question-circle me-1"></i> Kembali</a>
                 </div>
             </div>
         </div>
+
+
 
 
         <div class="row">
             <div class="col-12 mb-4">
                 <div class="card border-0 shadow components-section">
                     <div class="card-body">
-                        <form action="{{ route('pelanggan.store') }}" method="POST">
+                        <form action="{{ route('pelanggan.update', $dataPelanggan->pelanggan_id) }}" method="POST">
                             @csrf
+                            @method('PUT')
                             <div class="row mb-4">
                                 <div class="col-lg-4 col-sm-6">
                                     <!-- First Name -->
                                     <div class="mb-3">
                                         <label for="first_name" class="form-label">First name</label>
-                                        <input type="text" name="first_name" id="first_name" class="form-control"value="{{ $dataPelanggan->first_name }} required>
+                                        <input type="text" name="first name" id="first_name" class="form-control" value="{{ $dataPelanggan->first_name }}"required>
                                     </div>
+
+
 
 
                                     <!-- Last Name -->
                                     <div class="mb-3">
                                         <label for="last_name" class="form-label">Last name</label>
-                                        <input type="text" name="last_name" id="last_name" class="form-control" required>
+                                        <input type="text" name="last name" id="last_name" class="form-control" value="{{ $dataPelanggan->last_name }}" required>
                                     </div>
                                 </div>
+
+
 
 
                                 <div class="col-lg-4 col-sm-6">
                                     <!-- Birthday -->
                                     <div class="mb-3">
                                         <label for="birthday" class="form-label">Birthday</label>
-                                        <input type="date" name="birthday" id="birthday" class="form-control">
+                                        <input type="date" name="birthday" id="birthday" class="form-control" value="{{ $dataPelanggan->birthday }}">
                                     </div>
+
+
 
 
                                     <!-- Gender -->
                                     <div class="mb-3">
                                         <label for="gender" class="form-label">Gender</label>
                                         <select id="gender" name="gender" class="form-select">
-                                            <option value="">-- Pilih --</option>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
+                                            <option selected>Gender</option>
+                                            <option value="Male">{{ $dataPelanggan->gender =='Male' ? 'selected' : '' }} >Male</option>
+                                            <option value="Female">{{$dataPelanggan->gender == 'Famale' ? 'Selected' : ''}}>Female</option>
                                             <option value="Other">Other</option>
                                         </select>
                                     </div>
                                 </div>
 
 
+
+
                                 <div class="col-lg-4 col-sm-12">
                                     <!-- Email -->
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
-                                        <input type="text" name="email" id="email" class="form-control" required>
+                                        <input type="text" name="email" id="email" class="form-control" value="{{ $dataPelanggan->email }}" required>
                                     </div>
+
+
 
 
                                     <!-- Phone -->
                                     <div class="mb-3">
                                         <label for="phone" class="form-label">Phone</label>
-                                        <input type="text" name="phone" id="phone" class="form-control">
+                                        <input type="text" name="phone" id="phone" class="form-control" value="{{ $dataPelanggan->phone }}">
                                     </div>
+
+
 
 
                                     <!-- Buttons -->
@@ -379,9 +430,13 @@
                     </div>
 
 
+
+
                 </div>
             </div>
         </div>
+
+
 
 
         <footer class="bg-white rounded shadow p-5 mb-4 mt-4">
@@ -411,14 +466,20 @@
     </main>
 
 
+
+
     <!-- Core -->
     <script src="{{ asset('assets-admin/vendor/@popperjs/core/dist/umd/popper.min.js') }}"></script>
     <script src="{{ asset('assets-admin/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
 
+
+
     <!-- Volt JS -->
     <script src="{{ asset('assets-admin/js/volt.js') }}"></script>
 </body>
+
+
 
 
 </html>
