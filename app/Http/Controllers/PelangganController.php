@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
 
-
-use Illuminate\Http\Request;
 use App\Models\Pelanggan;
+use Illuminate\Http\Request;
 
 class PelangganController extends Controller
 {
@@ -13,8 +11,8 @@ class PelangganController extends Controller
      */
     public function index()
     {
-      $data['dataPelanggan'] = Pelanggan::all();
-		return view('admin.pelanggan.index',$data);
+        $data['dataPelanggan'] = Pelanggan::all();
+        return view('admin.pelanggan.index', $data);
     }
 
     /**
@@ -22,7 +20,7 @@ class PelangganController extends Controller
      */
     public function create()
     {
-       	return view('admin.pelanggan.create');
+        return view('admin.pelanggan.create');
     }
 
     /**
@@ -31,17 +29,17 @@ class PelangganController extends Controller
     public function store(Request $request)
     {
         //  dd($request->all());
-    $data['first_name'] = $request->first_name;
-		$data['last_name'] = $request->last_name;
-		$data['birthday'] = $request->birthday;
-		$data['gender'] = $request->gender;
-		$data['email'] = $request->email;
-		$data['phone'] = $request->phone;
+        $data['first_name'] = $request->first_name;
+        $data['last_name']  = $request->last_name;
+        $data['birthday']   = $request->birthday;
+        $data['gender']     = $request->gender;
+        $data['email']      = $request->email;
+        $data['phone']      = $request->phone;
 
-		Pelanggan::create($data);
+        Pelanggan::create($data);
 
-		return redirect()->route('pelanggan.index')->with('success','Penambahan Data Berhasil!');
-}
+        return redirect()->route('pelanggan.index')->with('success', 'Penambahan Data Berhasil!');
+    }
 
     /**
      * Display the specified resource.
@@ -56,43 +54,43 @@ class PelangganController extends Controller
      */
     public function edit(string $id)
     {
-       $data['dataPelanggan'] = Pelanggan::findOrFail($id);
-    return view('admin.pelanggan.edit', $data);
+        $data['dataPelanggan'] = Pelanggan::findOrFail($id);
+        return view('admin.pelanggan.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-  public function update(Request $request, string $id)
+    public function update(Request $request, string $id)
     {
         $pelanggan_id = $id;
-    $pelanggan = Pelanggan::findOrFail($pelanggan_id);
+        $pelanggan    = Pelanggan::findOrFail($pelanggan_id);
 
-    $pelanggan->first_name = $request->first_name;
-    $pelanggan->last_name = $request->last_name;
-    $pelanggan->birthday = $request->birthday;
-    $pelanggan->gender = $request->gender;
-    $pelanggan->email = $request->email;
-    $pelanggan->phone = $request->phone;
+        $pelanggan->first_name = $request->first_name;
+        $pelanggan->last_name  = $request->last_name;
+        $pelanggan->birthday   = $request->birthday;
+        $pelanggan->gender     = $request->gender;
+        $pelanggan->email      = $request->email;
+        $pelanggan->phone      = $request->phone;
 
-    $pelanggan->save();
+        $pelanggan->save();
 
-    return redirect()->route('pelanggan.index')->with('success', 'Perubahan Data Berhasil!');
+        return redirect()->route('pelanggan.index')->with('success', 'Perubahan Data Berhasil!');
     }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-{
-    // 1. Mencari data pelanggan berdasarkan ID ($id).
-    // Jika tidak ditemukan, akan secara otomatis memicu pengecualian (exception).
-    $pelanggan = Pelanggan::findOrFail($id);
+    {
+        // 1. Mencari data pelanggan berdasarkan ID ($id).
+        // Jika tidak ditemukan, akan secara otomatis memicu pengecualian (exception).
+        $pelanggan = Pelanggan::findOrFail($id);
 
-    // 2. Menghapus data pelanggan yang telah ditemukan.
-    $pelanggan->delete();
+        // 2. Menghapus data pelanggan yang telah ditemukan.
+        $pelanggan->delete();
 
-    // 3. Mengarahkan kembali pengguna ke halaman 'pelanggan.index'
-    // dan mengirimkan pesan 'success'.
-    return redirect()->route('pelanggan.index')->with('success', 'Data berhasil dihapus');
-}
+        // 3. Mengarahkan kembali pengguna ke halaman 'pelanggan.index'
+        // dan mengirimkan pesan 'success'.
+        return redirect()->route('pelanggan.index')->with('success', 'Data berhasil dihapus');
+    }
 }
