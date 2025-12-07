@@ -16,6 +16,6 @@ class CheckRole
         }
 
         // Jika role salah → Error 403 Forbidden
-        return abort(403, 'Akses ditolak');
+        return abort(403, 'akses anda tidak diterima');
     }
 }

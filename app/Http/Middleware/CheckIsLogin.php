@@ -15,7 +15,7 @@ class CheckIsLogin
     {
         // Jika BELUM login → redirect ke halaman login
         if (!Auth::check()) {
-            return redirect()->route('auth.index')->with('error', 'Silakan login terlebih dahulu.');
+            return redirect()->route('auth.index')->with('error', 'silakan login dlu.');
         }
 
         // Jika SUDAH login → lanjutkan request
